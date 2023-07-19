@@ -115,6 +115,23 @@ for i in range(numPeople):
         -1, int(feature_vals[0]), int(feature_vals[1])
     )
 
+    # plot feature importance
+    for p, importance_image in enumerate(featureImportanceImages):
+        plt.figure()
+        plt.imshow(
+            importance_image.reshape(int(feature_vals[0]), int(feature_vals[1])),
+            cmap="hot",
+            interpolation="nearest",
+        )
+        plt.xlabel("Column")
+        plt.ylabel("Row")
+        original_label = support_vector_labels[p]
+        plt.title(
+            f"Feature Importance - Support Vector {p+1} (Label: {original_label})"
+        )
+        plt.colorbar()
+        plt.show()
+
     # get overall accuracy
     accuracy = np.sum(predictions == testLabels) / len(testLabels)
     print(f"Overall Accuracy for Person {person_ids[i]}: {accuracy * 100:.2f}%")
